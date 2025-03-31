@@ -36,6 +36,7 @@ const EmpojiPicker = ({
   groupNames = {},
   pickerStyle = {},
   groupVisibility = {},
+  isPickerVisible = false,
 }) => {
   const emojiListRef = useRef(null);
   const isMounted = useRef(true);
@@ -70,7 +71,7 @@ const EmpojiPicker = ({
   };
 
   const checkEmojisUrlWorkability = () => {
-    const unified = '641f3d9-fe0f';
+    const unified = '1f440';
     fetch(`${DEFAULT_EMOJI_URL}/${unified}.png`)
       .then(res => {
         if (res.status === 200 && state.native)
@@ -86,8 +87,8 @@ const EmpojiPicker = ({
   };
 
   useEffect(() => {
-    checkEmojisUrlWorkability();
-  }, []);
+    if (isPickerVisible) checkEmojisUrlWorkability();
+  }, [isPickerVisible]);
 
   const updateRecentlyUsed = () => {
     dispatch({ type: actionTypes.UPDATE_RECENTLY_USED });
@@ -162,4 +163,5 @@ EmpojiPicker.propTypes = {
   native: PropTypes.bool,
   pickerStyle: PropTypes.objectOf(PropTypes.string),
   groupVisibility: PropTypes.objectOf(PropTypes.bool),
+  isPickerVisible: PropTypes.bool,
 };
