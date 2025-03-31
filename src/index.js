@@ -74,9 +74,10 @@ const EmpojiPicker = ({
     const unified = '1f440';
     fetch(`${DEFAULT_EMOJI_URL}/${unified}.png`)
       .then(res => {
-        if (res.status === 200 && state.native)
+        const isResponseStatusOk = res.status === 200;
+        if (isResponseStatusOk && state.native)
           dispatch({ type: actionTypes.IS_NATIVE_EMOJIS, native: false });
-        else if (!state.native)
+        else if (!isResponseStatusOk && !state.native)
           dispatch({ type: actionTypes.IS_NATIVE_EMOJIS, native: true });
       })
       .catch(err => {
