@@ -19,8 +19,8 @@ import CategoriesNav from './components/CategoriesNav';
 import EmojiList from './components/EmojiList';
 import Search from './components/Search';
 import RecentlyUsed from './components/RecentlyUsed';
-import './style.css';
 import { groupNamesPropType } from './lib/propTypes';
+import './style.css';
 
 const emojiPickerDispatcher = {};
 
