@@ -69,26 +69,6 @@ const EmpojiPicker = ({
     return useReducerDispatch(...props);
   };
 
-  const checkEmojisUrlWorkability = () => {
-    const unified = '641f3d9-fe0f';
-    fetch(`${DEFAULT_EMOJI_URL}/${unified}.png`)
-      .then(res => {
-        if (res.status === 200 && state.native)
-          dispatch({ type: actionTypes.IS_NATIVE_EMOJIS, native: false });
-        else if (!state.native)
-          dispatch({ type: actionTypes.IS_NATIVE_EMOJIS, native: true });
-      })
-      .catch(err => {
-        if (!state.native)
-          dispatch({ type: actionTypes.IS_NATIVE_EMOJIS, native: true });
-        console.log(err);
-      });
-  };
-
-  useEffect(() => {
-    checkEmojisUrlWorkability();
-  }, []);
-
   const updateRecentlyUsed = () => {
     dispatch({ type: actionTypes.UPDATE_RECENTLY_USED });
   };
