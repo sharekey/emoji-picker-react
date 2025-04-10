@@ -13,16 +13,10 @@ export const actionTypes = {
   FILTER_SET: 'FILTER_SET',
   UPDATE_RECENTLY_USED: 'UPDATE_RECENTLY_USED',
   UPDATE_SEARCH_STRING: 'UPDATE_SEARCH_STRING',
-  IS_NATIVE_EMOJIS: 'IS NATIVE EMOJIS',
 };
 
 const reducer = (state, { type, ...action }) => {
   switch (type) {
-    case actionTypes.IS_NATIVE_EMOJIS:
-      return {
-        ...state,
-        native: action.native,
-      };
     case actionTypes.VARIATION_MENU_SET:
       return state.variationMenu === action.emoji
         ? state
