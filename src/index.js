@@ -19,8 +19,8 @@ import CategoriesNav from './components/CategoriesNav';
 import EmojiList from './components/EmojiList';
 import Search from './components/Search';
 import RecentlyUsed from './components/RecentlyUsed';
-import './style.css';
 import { groupNamesPropType } from './lib/propTypes';
+import './style.css';
 
 const emojiPickerDispatcher = {};
 
@@ -36,7 +36,6 @@ const EmpojiPicker = ({
   groupNames = {},
   pickerStyle = {},
   groupVisibility = {},
-  isPickerVisible = false,
 }) => {
   const emojiListRef = useRef(null);
   const isMounted = useRef(true);
@@ -69,27 +68,6 @@ const EmpojiPicker = ({
     }
     return useReducerDispatch(...props);
   };
-
-  const checkEmojisUrlWorkability = () => {
-    const unified = '1f440';
-    fetch(`${DEFAULT_EMOJI_URL}/${unified}.png`)
-      .then(res => {
-        const isResponseStatusOk = res.status === 200;
-        if (isResponseStatusOk && state.native)
-          dispatch({ type: actionTypes.IS_NATIVE_EMOJIS, native: false });
-        else if (!isResponseStatusOk && !state.native)
-          dispatch({ type: actionTypes.IS_NATIVE_EMOJIS, native: true });
-      })
-      .catch(err => {
-        if (!state.native)
-          dispatch({ type: actionTypes.IS_NATIVE_EMOJIS, native: true });
-        console.log(err);
-      });
-  };
-
-  useEffect(() => {
-    if (isPickerVisible) checkEmojisUrlWorkability();
-  }, [isPickerVisible]);
 
   const updateRecentlyUsed = () => {
     dispatch({ type: actionTypes.UPDATE_RECENTLY_USED });
@@ -164,5 +142,4 @@ EmpojiPicker.propTypes = {
   native: PropTypes.bool,
   pickerStyle: PropTypes.objectOf(PropTypes.string),
   groupVisibility: PropTypes.objectOf(PropTypes.bool),
-  isPickerVisible: PropTypes.bool,
 };
